@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger
 class TicketConsumer (private val ticketRepository: TicketRepository) {
     private val messageCount = AtomicInteger(0)
 
-    @Queue(value = "ticket_queue", concurrency = "1-3", messageSelector = "null")
+    @Queue(value = "ticket_queue", concurrency = "1-3")
     fun receive(@MessageBody body: String) {
         LOGGER.info("Message has been consumed. Message body: {}", body)
         val objectMapper: ObjectMapper = ObjectMapper.getDefault()
