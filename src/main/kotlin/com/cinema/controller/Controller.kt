@@ -16,8 +16,10 @@ import io.micronaut.serde.ObjectMapper
 class Controller (private val jmsService: JMSService) {
     @Post("/demo")
     @Status(HttpStatus.NO_CONTENT)
-    fun publishDemoMessages(@Body movie: Movie) {
-        jmsService.publish(movie.name)
+    fun publishDemoMessages(@Body ticket: Ticket) {
+        val objectMapper: ObjectMapper = ObjectMapper.getDefault()
+
+        jmsService.publish(objectMapper.writeValueAsString(ticket))
     }
 
     @Get("/teste")

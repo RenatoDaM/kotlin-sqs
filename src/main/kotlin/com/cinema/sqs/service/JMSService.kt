@@ -4,6 +4,7 @@ import com.amazon.sqs.javamessaging.AmazonSQSMessagingClientWrapper
 import com.amazon.sqs.javamessaging.ProviderConfiguration
 import com.amazon.sqs.javamessaging.SQSConnection
 import com.amazon.sqs.javamessaging.SQSConnectionFactory
+import com.cinema.repository.TicketRepository
 import com.cinema.sqs.listener.TicketListener
 import jakarta.inject.Singleton
 import software.amazon.awssdk.services.sqs.SqsClient
@@ -13,7 +14,7 @@ import javax.jms.Queue
 import javax.jms.Session
 
 @Singleton
-class JMSService {
+class JMSService(private val ticketRepository: TicketRepository) {
     // Create a new connection factory with all defaults (credentials and region) set automatically
     private var connectionFactory: SQSConnectionFactory = SQSConnectionFactory(
         ProviderConfiguration(),
@@ -28,7 +29,7 @@ class JMSService {
         }
         val session: Session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE)
         val consumer: MessageConsumer = session.createConsumer(session.createQueue("ticket_queue"))
-        consumer.messageListener = TicketListener()
+        consumer.messageListener = TicketListener(ticketRepository)
         connection.start();
         Thread.sleep(1000);
     }
@@ -39,6 +40,6 @@ class JMSService {
         val producer: MessageProducer = session.createProducer(queue)
         val message = session.createTextMessage(textMessage)
         producer.send(message)
-        println("Published!!!")
+        println("Published!!!: body: $textMessage")
     }
 }
