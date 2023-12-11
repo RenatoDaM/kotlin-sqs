@@ -2,6 +2,7 @@ package com.cinema.model
 
 import com.cinema.annotation.NoArgsConstructor
 import io.micronaut.serde.annotation.Serdeable
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -18,5 +19,6 @@ data class Movie (
     val name: String,
     val description: String,
     @OneToMany(mappedBy = "movie")
+    @Column(nullable = true)
     val tickets: List<Ticket>?
 )

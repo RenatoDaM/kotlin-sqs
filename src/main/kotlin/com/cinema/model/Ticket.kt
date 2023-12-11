@@ -17,6 +17,6 @@ data class Ticket (
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long?,
     @ManyToOne
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "movie_id", nullable = true)
     val movie: Movie?
 )

@@ -1,5 +1,6 @@
 package com.cinema.controller
 
+import com.cinema.model.Movie
 import com.cinema.model.Ticket
 import com.cinema.sqs.TicketProducer
 import io.micronaut.http.HttpStatus
@@ -18,5 +19,12 @@ class Controller (private val ticketProducer: TicketProducer) {
     fun publishDemoMessages(@Body ticket: Ticket) {
         val objectMapper: ObjectMapper = ObjectMapper.getDefault()
         ticketProducer.send(objectMapper.writeValueAsString(ticket))
+    }
+
+    @Post("/movie")
+    @Status(HttpStatus.NO_CONTENT)
+    fun publishMovie(@Body movie: Movie) {
+        val objectMapper: ObjectMapper = ObjectMapper.getDefault()
+        ticketProducer.send(objectMapper.writeValueAsString(movie))
     }
 }
