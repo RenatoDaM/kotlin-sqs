@@ -30,7 +30,7 @@ dependencies {
     implementation("io.micronaut.validation:micronaut-validation")
     implementation("io.micronaut.jms:micronaut-jms-sqs:3.1.0")
     implementation("aws.sdk.kotlin:sqs:1.0.13")
-    implementation(files("libs/micronaut-jms-core-3.0.2-SNAPSHOT.jar"))
+    implementation(files("libs/micronaut-jms-core-3.1.1-SNAPSHOT.jar"))
     implementation("org.slf4j:slf4j-api:2.0.9")
     implementation("com.amazonaws:aws-java-sdk:1.12.609")
     implementation("io.micronaut.aws:micronaut-aws-sdk-v1")
