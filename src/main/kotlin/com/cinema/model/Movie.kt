@@ -11,7 +11,6 @@ import jakarta.persistence.OneToMany
 
 @Entity
 @NoArgsConstructor
-@Serdeable
 data class Movie (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,4 +20,6 @@ data class Movie (
     @OneToMany(mappedBy = "movie")
     @Column(nullable = true)
     val tickets: List<Ticket>?
-)
+) {
+    constructor(id: Long) : this(id, "", "", null)
+}
