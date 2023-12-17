@@ -10,7 +10,7 @@ the tickets are published to an SQS queue and consumed in the listener.
 
 # How to run
 - Create an application yml (or .properties) structure containing your AWS Credentials and
-another informations like database, jpa, etc.
+another information like database, jpa, etc.
 
 - Do login via CLI with "aws configure" terminal command
 
